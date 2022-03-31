@@ -1,31 +1,24 @@
 apiVersion: v1
 entries:
-  pwa-main:
-  - apiVersion: v1
-    appVersion: "1.0"
-    created: "2022-03-22T17:15:23.563077545Z"
-    description: Intershop Progressive Web App
-    digest: 71b7cbcaf836ed10d27ae120d4bd2936f73934f593990ed7306158ce05e8be96
-    name: pwa-main
+  icm-as:
+  - apiVersion: v2
+    appVersion: 11.0.0
+    created: "2022-03-31T07:47:41.654655764Z"
+    description: Intershop Commerce Management - AppServer
+    digest: 32b62a983e4c97dd9020f0ea08b24c06172cc869515f5cc3794fde6c88d59cce
+    name: icm-as
+    type: application
     urls:
-    - https://github.com/intershop/helm-charts/releases/download/pwa-main-0.3.0/pwa-main-0.3.0.tgz
-    version: 0.3.0
+    - https://github.com/khauser/helm-charts/releases/download/icm-as-0.2.6/icm-as-0.2.6.tgz
+    version: 0.2.6
+  icm-web:
   - apiVersion: v1
-    appVersion: "1.0"
-    created: "2022-03-08T16:27:11.967590007Z"
-    description: Intershop Progressive Web App
-    digest: 7f2a8a6abfe666fe8ff15c4627dc307ff83622d973ad31f6b5dddde248e078c1
-    name: pwa-main
+    appVersion: 11.0.0
+    created: "2022-03-31T07:47:41.884739604Z"
+    description: Intershop Commerce Management - Web Adapter and Web Adapter Agent
+    digest: d3683d2e991cd4ef7355e95b6b1ec6e53a2dad8d9d11bc3705200267a450c988
+    name: icm-web
     urls:
-    - https://github.com/intershop/helm-charts/releases/download/pwa-main-0.2.4/pwa-main-0.2.4.tgz
-    version: 0.2.4
-  - apiVersion: v1
-    appVersion: "1.0"
-    created: "2022-03-02T13:35:31.699144708Z"
-    description: Intershop Progressive Web App
-    digest: 2da5f495213a63c2582645fa79463dd8cf106d58aa73583c2e9391459714425a
-    name: pwa-main
-    urls:
-    - https://github.com/intershop/helm-charts/releases/download/pwa-main-0.2.3/pwa-main-0.2.3.tgz
-    version: 0.2.3
-generated: "2022-03-22T17:15:23.563091945Z"
+    - https://github.com/khauser/helm-charts/releases/download/icm-web-0.1.30/icm-web-0.1.30.tgz
+    version: 0.1.30
+generated: "2022-03-31T07:47:41.884977605Z"
