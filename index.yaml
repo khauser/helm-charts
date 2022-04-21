@@ -1,5 +1,15 @@
 apiVersion: v1
 entries:
+  icm:
+  - apiVersion: v1
+    appVersion: 11.0.0
+    created: "2022-04-21T09:20:12.301187855Z"
+    description: Intershop Commerce Management - ICM
+    digest: bad71ca37ba3bda5f330d784f5d074f688d9367bd0fdb61e40d3e4504d8292f2
+    name: icm
+    urls:
+    - https://github.com/khauser/helm-charts/releases/download/icm-0.2.8/icm-0.2.8.tgz
+    version: 0.2.8
   icm-as:
   - apiVersion: v2
     appVersion: 11.0.0
@@ -21,4 +31,4 @@ entries:
     urls:
     - https://github.com/khauser/helm-charts/releases/download/icm-web-0.1.30/icm-web-0.1.30.tgz
     version: 0.1.30
-generated: "2022-03-31T07:47:41.884977605Z"
+generated: "2022-04-21T09:20:12.730691437Z"
