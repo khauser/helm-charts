@@ -1,11 +1,11 @@
 name: "Unit test icm chart"
-#on:
-#  pull_request:
-#    paths:
-#    - 'charts/icm/**'
+on:
+  pull_request:
+    paths:
+    - 'charts/icm/**'
 
 jobs:
-  lint-test-icm-unitTest:
+  lint-test-icm-unittest:
     runs-on: ubuntu-latest
     steps:
     - name: Base
