@@ -13,6 +13,7 @@ deploymentAnnotations: {}
 #  myAnnotation: true
 podAnnotations: {}
 #  myAnnotation: true
+podAnnotations: {}
 
 # define podbinding if required
 podBinding:
