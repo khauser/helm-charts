@@ -18,7 +18,9 @@ jobs:
         id: list-changed-charts
         uses: tj-actions/changed-files@v1.1.3
         with:
-          files: charts/*/Chart.yaml
+          dir_names_max_depth: 2
+          files: |
+            charts/**
   release:
     needs:
     - find-charts-to-release
