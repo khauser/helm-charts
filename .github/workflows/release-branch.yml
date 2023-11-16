@@ -58,13 +58,15 @@ jobs:
         tag_prefix: "icm-as-"
         change_path: "charts/icm-as"
         debug: true
-    - name: Bump version and push tag
-      uses: anothrNick/github-tag-action@1.64.0
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        WITH_V: false
-        SOURCE: "charts/icm-as"
-        DRY_RUN: true
+    - name: Verify
+      run: |
+        echo "Hallo debug_output: ${{ needs.version.outputs.debug_output }}"
+        echo "Hallo previous_version : ${{ needs.version.outputs.previous_version }}"
+        echo "Hallo is_tagged  : ${{ needs.version.outputs.is_tagged  }}"
+        echo "Hallo version_type  : ${{ needs.version.outputs.version_type  }}"
+        echo "Hallo previous_commit   : ${{ needs.version.outputs.previous_commit   }}"
+        echo "Hallo previous_version   : ${{ needs.version.outputs.previous_version   }}"
+        
 #    - name: Bump versions
 #      uses: ./.github/template/bump-version
 #      with:
