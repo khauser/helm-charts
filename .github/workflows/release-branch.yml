@@ -45,8 +45,8 @@ jobs:
         fetch-depth: 0
     - name: Check
       run: |
-        changed_directories=$(echo ${{ needs.find-charts-to-release.outputs.modified-charts-files }} | awk -F'/' '{for (i=1; i<=NF; i+=2) print $i}')
-
+        changed_directories=$(echo ${{ needs.find-charts-to-release.outputs.modified-charts-files }} | grep -o 'charts/[^/]*' | cut -d '/' -f 2)
+        
         # Entferne Duplikate mit tr und sort
         unique_changed_directories=$(echo "$changed_directories" | tr ' ' '\n' | sort -u | tr '\n' ' ')
 
