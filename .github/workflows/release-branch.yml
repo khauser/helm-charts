@@ -45,10 +45,11 @@ jobs:
         fetch-depth: 0
     - name: Check
       run: |
-        changed_directories=$(echo ${{ needs.find-charts-to-release.outputs.modified-charts-files }} | awk -F'/' '{print $2, $4}')
-        # Entferne Duplikate, indem das Array in ein assoziatives Array konvertiert wird
-        unique_changed_directories=$(echo "$changed_directories" | awk '!seen[$0]++')
-        
+        changed_directories=$(echo ${{ needs.find-charts-to-release.outputs.modified-charts-files }} | awk -F'/' '{for (i=1; i<=NF; i+=2) print $i}')
+
+        # Entferne Duplikate mit tr und sort
+        unique_changed_directories=$(echo "$changed_directories" | tr ' ' '\n' | sort -u | tr '\n' ' ')
+
         echo "unique_changed_directories: ${unique_changed_directories}"
 #    - name: Bump versions
 #      uses: ./.github/template/bump-version
