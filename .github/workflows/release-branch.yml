@@ -51,6 +51,11 @@ jobs:
         unique_changed_directories=$(echo "$changed_directories" | tr ' ' '\n' | sort -u | tr '\n' ' ')
 
         echo "unique_changed_directories: ${unique_changed_directories}"
+    - name: Determine semantic version
+      id: version
+      uses: paulhatch/semantic-version@v5.3.0
+      with:
+        change_path: "charts/icm-as"
 #    - name: Bump versions
 #      uses: ./.github/template/bump-version
 #      with:
