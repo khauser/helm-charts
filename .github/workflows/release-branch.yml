@@ -36,8 +36,8 @@ jobs:
         fetch-depth: 0
     - name: Check
       run: |
-        released_charts_files="${{ needs.find-charts-to-release.outputs.modified-charts-files }}"
-        echo "released_charts_files: ${released_charts_files}"
+        changed_directories=$(echo ${{ needs.find-charts-to-release.outputs.modified-charts-files }} | awk -F'/' '{print $2, $4}')
+        echo "changed_directories: ${changed_directories}"
 #    - name: Bump versions
 #      uses: ./.github/template/bump-version
 #      with:
