@@ -57,6 +57,7 @@ jobs:
       with:
         tag_prefix: "icm-as-"
         change_path: "charts/icm-as"
+        debug: true
 #    - name: Bump versions
 #      uses: ./.github/template/bump-version
 #      with:
