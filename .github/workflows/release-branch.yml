@@ -47,10 +47,7 @@ jobs:
       run: |
         changed_directories=$(echo ${{ needs.find-charts-to-release.outputs.modified-charts-files }} | awk -F'/' '{print $2, $4}')
         # Entferne Duplikate, indem das Array in ein assoziatives Array konvertiert wird
-        declare -A unique_changed_directories
-        for dir in "${changed_directories[@]}"; do
-          unique_changed_directories["$dir"]=1
-        done
+        unique_changed_directories=$(echo "$changed_directories" | awk '!seen[$0]++')
         
         echo "unique_changed_directories: ${unique_changed_directories}"
 #    - name: Bump versions
