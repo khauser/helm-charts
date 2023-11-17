@@ -85,11 +85,13 @@ jobs:
         #echo "Hallo version_type  : ${{ steps.version.outputs.version_type }}"
         #echo "Hallo previous_commit   : ${{ steps.version.outputs.previous_commit }}"
         #echo "Hallo previous_version   : ${{ steps.version.outputs.previous_version }}"
-        if [ -n "${{ env.RELEASE_INPUT_PARAMETER }}" ]; then
-          echo "RELEASE_INPUT_PARAMETER=${{ env.RELEASE_INPUT_PARAMETER }} ${{ matrix.value }}:${{ steps.version.outputs.version_type }}" >> "$GITHUB_ENV"
-        else
-          echo "RELEASE_INPUT_PARAMETER=${{ matrix.value }}:${{ steps.version.outputs.version_type }}" >> "$GITHUB_ENV"
-        fi
+        mkdir artifact-exchange
+        echo ${{ matrix.value }}:${{ steps.version.outputs.version_type }} > artifact-exchange/release-input-parameter.txt
+    - name: Create artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: release-input-parameter
+        path: artifact-exchange/release-input-parameter.txt
   release:
     needs:
     - determine-semantic-version
@@ -98,10 +100,16 @@ jobs:
       contents: write
     runs-on: ubuntu-latest
     steps:
+    - uses: actions/download-artifact@v2
+      with:
+        name: release-input-parameter
     - name: Verify
       id: verify
       run: |
-        echo "Hallo: $RELEASE_INPUT_PARAMETER"
+        cat artifact-exchange/release-input-parameter.txt
+    - uses: geekyeggo/delete-artifact@v1
+      with:
+        name: release-input-parameter
 #    - name: Bump versions
 #      uses: ./.github/template/bump-version
 #      with:
