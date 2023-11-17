@@ -82,7 +82,7 @@ jobs:
         #echo "Hallo version_type  : ${{ steps.version.outputs.version_type }}"
         #echo "Hallo previous_commit   : ${{ steps.version.outputs.previous_commit }}"
         #echo "Hallo previous_version   : ${{ steps.version.outputs.previous_version }}"
-        echo "RELEASE_INPUT_PARAMETER=${{ env.RELEASE_INPUT_PARAMETER }} ${{ matrix.value }}:${{ steps.version.outputs.version_type }}" >> $GITHUB_ENV
+        echo "RELEASE_INPUT_PARAMETER=${{ env.RELEASE_INPUT_PARAMETER }} ${{ matrix.value }}:${{ steps.version.outputs.version_type }}" >> "$GITHUB_ENV"
   release:
     needs:
     - determine-semantic-version
