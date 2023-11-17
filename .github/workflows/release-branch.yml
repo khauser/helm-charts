@@ -10,7 +10,7 @@ jobs:
       matrix: ${{ steps.matrix.outputs.matrix }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4.1.1
         with:
           fetch-depth: 0
       - name: Get last SHA with tag
@@ -42,7 +42,7 @@ jobs:
           echo "unique_changed_directories: ${unique_changed_directories}"
           
           arr=($unique_changed_directories)
-          echo "matrix=$arr" >> $GITHUB_OUTPUT
+          echo "matrix=[ \"${arr[@]}\" ]" >> $GITHUB_OUTPUT
   release:
     needs:
     - find-charts-to-release
@@ -55,7 +55,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4.1.1
       with: #fetch all commits, not just the last one
         fetch-depth: 0
 
