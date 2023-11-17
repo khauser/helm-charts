@@ -75,7 +75,7 @@ jobs:
     - name: Create the release input parameters
       id: create-release-input-parameter
       run: |
-        set-x
+        set -x
         #echo "Hallo debug_output: ${{ steps.version.outputs.debug_output }}"
         #echo "Hallo previous_version : ${{ steps.version.outputs.previous_version }}"
         #echo "Hallo is_tagged  : ${{ steps.version.outputs.is_tagged }}"
