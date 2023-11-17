@@ -72,6 +72,7 @@ jobs:
         change_path: "charts/${{ matrix.value }}"
         major_pattern: "BREAKING_CHANGE"
         minor_pattern: '/feat\s*(\(\w+\)*)?:/'
+        search_commit_body: true
         debug: true
     - name: Verify
       run: |
