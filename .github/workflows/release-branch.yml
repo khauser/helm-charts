@@ -3,6 +3,9 @@ name: Create Release Branch
 on:
   workflow_dispatch:
 
+env:
+  RELEASE_INPUT_PARAMETER:
+
 jobs:
   find-charts-to-release:
     runs-on: ubuntu-latest
@@ -82,7 +85,11 @@ jobs:
         #echo "Hallo version_type  : ${{ steps.version.outputs.version_type }}"
         #echo "Hallo previous_commit   : ${{ steps.version.outputs.previous_commit }}"
         #echo "Hallo previous_version   : ${{ steps.version.outputs.previous_version }}"
-        echo "RELEASE_INPUT_PARAMETER=${{ env.RELEASE_INPUT_PARAMETER }} ${{ matrix.value }}:${{ steps.version.outputs.version_type }}" >> "$GITHUB_ENV"
+        if [ -n "${{ env.RELEASE_INPUT_PARAMETER }}" ]; then
+          echo "RELEASE_INPUT_PARAMETER=${{ env.RELEASE_INPUT_PARAMETER }} ${{ matrix.value }}:${{ steps.version.outputs.version_type }}" >> "$GITHUB_ENV"
+        else
+          echo "RELEASE_INPUT_PARAMETER=${{ matrix.value }}:${{ steps.version.outputs.version_type }}" >> "$GITHUB_ENV"
+        fi
   release:
     needs:
     - determine-semantic-version
