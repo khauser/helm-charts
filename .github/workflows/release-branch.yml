@@ -42,7 +42,12 @@ jobs:
           echo "unique_changed_directories: ${unique_changed_directories}"
           
           arr=($unique_changed_directories)
-          echo "matrix=[ \"${arr[@]}\" ]" >> $GITHUB_OUTPUT
+          for element in "${arr[@]}"; do
+            formatted_output+=" \"$element\","
+          done
+          formatted_output=${formatted_output%,} # Entferne das letzte Komma
+          
+          echo "matrix=[ $formatted_output ]" >> $GITHUB_OUTPUT
   release:
     needs:
     - find-charts-to-release
