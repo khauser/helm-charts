@@ -55,8 +55,6 @@ jobs:
       matrix:
         value: ${{fromJSON(needs.find-charts-to-release.outputs.matrix)}}
       max-parallel: 1
-    outputs:
-      release-input-parameter: ${{ steps.create-release-input-parameter.outputs.release-input-parameter }}
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
@@ -83,7 +81,7 @@ jobs:
         #echo "Hallo version_type  : ${{ steps.version.outputs.version_type }}"
         #echo "Hallo previous_commit   : ${{ steps.version.outputs.previous_commit }}"
         #echo "Hallo previous_version   : ${{ steps.version.outputs.previous_version }}"
-        echo "release-input-parameter=${{ steps.create-release-input-parameter.outputs.release-input-parameter }} ${{ matrix.value }}:${{ steps.version.outputs.version_type }}" >> $GITHUB_OUTPUT
+        echo "RELEASE_INPUT_PARAMETER=$RELEASE_INPUT_PARAMETER ${{ matrix.value }}:${{ steps.version.outputs.version_type }}" >> $GITHUB_ENV
   release:
     needs:
     - determine-semantic-version
@@ -95,7 +93,7 @@ jobs:
     - name: Verify
       id: verify
       run: |
-        echo "Hallo: ${{ needs.determine-semantic-version.outputs.release-input-parameter }}"
+        echo "Hallo: $RELEASE_INPUT_PARAMETER"
 #    - name: Bump versions
 #      uses: ./.github/template/bump-version
 #      with:
