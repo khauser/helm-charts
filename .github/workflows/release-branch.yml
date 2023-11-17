@@ -84,7 +84,7 @@ jobs:
         search_commit_body: true
         debug: true
 
-    - uses: actions/download-artifact@v2
+    - uses: actions/download-artifact@v3
       with:
         name: release-input-parameter
 
@@ -98,7 +98,7 @@ jobs:
         #echo "Hallo version_type  : ${{ steps.version.outputs.version_type }}"
         #echo "Hallo previous_commit   : ${{ steps.version.outputs.previous_commit }}"
         #echo "Hallo previous_version   : ${{ steps.version.outputs.previous_version }}"
-        echo ${{ matrix.value }}:${{ steps.version.outputs.version_type }} >> release-input-parameter.txt
+        echo -n " ${{ matrix.value }}:${{ steps.version.outputs.version_type }}" >> release-input-parameter.txt
     - name: Update artifact
       uses: actions/upload-artifact@v3
       with:
@@ -112,13 +112,13 @@ jobs:
       contents: write
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/download-artifact@v2
+    - uses: actions/download-artifact@v3
       with:
         name: release-input-parameter
     - name: Verify
       id: verify
       run: |
-        cat release-input-parameter.txt
+        cat release-input-parameter.txt | xargs
     - uses: geekyeggo/delete-artifact@v1
       with:
         name: release-input-parameter
