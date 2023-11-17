@@ -23,7 +23,7 @@ jobs:
         if [[ ${{ github.ref_name }} = develop/* ]]; then
           IFS='/' read -ra my_array <<< "${{ github.ref_name }}"
           
-          last_tag=$(git describe --tags --match="$my_array[1]-*" HEAD)
+          last_tag=$(git describe --tags --match="${my_array[1]}-*" HEAD)
           sha=$(git rev-list -n 1 $last_tag)
         
           echo "sha=$sha" >> $GITHUB_OUTPUT
