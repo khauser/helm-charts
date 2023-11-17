@@ -43,7 +43,7 @@ dependencies = {
   ProductType.ICM_REPLICATION: [],
   ProductType.ICM: [ProductType.ICM_REPLICATION],
   ProductType.ICM_AS: [ProductType.ICM],
-  ProductType.ICM_JOB: [ProductType.ICM_AS],
+  ProductType.ICM_JOB: [],
   ProductType.ICM_WEB: [ProductType.ICM]
 }
 
