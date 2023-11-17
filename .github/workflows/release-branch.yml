@@ -12,45 +12,53 @@ jobs:
     outputs:
       matrix: ${{ steps.matrix.outputs.matrix }}
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4.1.1
-        with:
-          fetch-depth: 0
-      - name: Get last SHA with tag
-        id: last_tagged_sha
-        run: |
-          git config user.name "$GITHUB_ACTOR"
-          git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
-          last_tag=$(git describe --abbrev=0 --tags)
-          sha=$(git rev-list -n 1 $last_tag)
-          
-          echo "sha=$sha" >> $GITHUB_OUTPUT
-      - name: Get list of changed charts
-        id: list-changed-charts
-        uses: tj-actions/changed-files@v40.1.1
-        with:
-          #dir_names: "true"
-          dir_names_max_depth: 2
-          #dir_names_exclude_root: "true"
-          sha: ${{ steps.last_tagged_sha.outputs.sha }}
-          files: |
-            charts/**
-      - name: Check changed charts
-        id: matrix
-        run: |
-          changed_directories=$(echo ${{ steps.list-changed-charts.outputs.all_modified_files }} | grep -o 'charts/[^/]*' | cut -d '/' -f 2)
+    - name: Checkout
+      uses: actions/checkout@v4.1.1
+      with:
+        fetch-depth: 0
+    - name: Get last SHA with tag
+      id: last_tagged_sha
+      run: |
+        git config user.name "$GITHUB_ACTOR"
+        git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
+        last_tag=$(git describe --abbrev=0 --tags)
+        sha=$(git rev-list -n 1 $last_tag)
         
-          # Entferne Duplikate mit tr und sort
-          unique_changed_directories=$(echo "$changed_directories" | tr ' ' '\n' | sort -u | tr '\n' ' ')
-          echo "unique_changed_directories: ${unique_changed_directories}"
-          
-          arr=($unique_changed_directories)
-          for element in "${arr[@]}"; do
-            formatted_output+=" \"$element\","
-          done
-          formatted_output=${formatted_output%,} # Entferne das letzte Komma
-          
-          echo "matrix=[ $formatted_output ]" >> $GITHUB_OUTPUT
+        echo "sha=$sha" >> $GITHUB_OUTPUT
+    - name: Get list of changed charts
+      id: list-changed-charts
+      uses: tj-actions/changed-files@v40.1.1
+      with:
+        #dir_names: "true"
+        dir_names_max_depth: 2
+        #dir_names_exclude_root: "true"
+        sha: ${{ steps.last_tagged_sha.outputs.sha }}
+        files: |
+          charts/**
+    - name: Check changed charts
+      id: matrix
+      run: |
+        changed_directories=$(echo ${{ steps.list-changed-charts.outputs.all_modified_files }} | grep -o 'charts/[^/]*' | cut -d '/' -f 2)
+        
+        # Entferne Duplikate mit tr und sort
+        unique_changed_directories=$(echo "$changed_directories" | tr ' ' '\n' | sort -u | tr '\n' ' ')
+        echo "unique_changed_directories: ${unique_changed_directories}"
+        
+        arr=($unique_changed_directories)
+        for element in "${arr[@]}"; do
+          formatted_output+=" \"$element\","
+        done
+        formatted_output=${formatted_output%,} # Entferne das letzte Komma
+        
+        echo "matrix=[ $formatted_output ]" >> $GITHUB_OUTPUT
+        
+        # to be able to exchange the version information in the next jobs
+        touch release-input-parameter.txt
+    - name: Create artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: release-input-parameter
+        path: release-input-parameter.txt
   determine-semantic-version:
     needs:
     - find-charts-to-release
@@ -75,6 +83,11 @@ jobs:
         minor_pattern: '/feat\s*(\(\w+\)*)?:/'
         search_commit_body: true
         debug: true
+
+    - uses: actions/download-artifact@v2
+      with:
+        name: release-input-parameter
+
     - name: Create the release input parameters
       id: create-release-input-parameter
       run: |
@@ -85,13 +98,12 @@ jobs:
         #echo "Hallo version_type  : ${{ steps.version.outputs.version_type }}"
         #echo "Hallo previous_commit   : ${{ steps.version.outputs.previous_commit }}"
         #echo "Hallo previous_version   : ${{ steps.version.outputs.previous_version }}"
-        mkdir artifact-exchange
-        echo ${{ matrix.value }}:${{ steps.version.outputs.version_type }} > artifact-exchange/release-input-parameter.txt
-    - name: Create artifacts
+        echo ${{ matrix.value }}:${{ steps.version.outputs.version_type }} > release-input-parameter.txt
+    - name: Update artifact
       uses: actions/upload-artifact@v3
       with:
         name: release-input-parameter
-        path: artifact-exchange/release-input-parameter.txt
+        path: release-input-parameter.txt
   release:
     needs:
     - determine-semantic-version
@@ -106,7 +118,7 @@ jobs:
     - name: Verify
       id: verify
       run: |
-        cat artifact-exchange/release-input-parameter.txt
+        cat release-input-parameter.txt
     - uses: geekyeggo/delete-artifact@v1
       with:
         name: release-input-parameter
