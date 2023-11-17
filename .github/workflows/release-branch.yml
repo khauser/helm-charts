@@ -41,7 +41,7 @@ jobs:
           echo "unique_changed_directories: ${unique_changed_directories}"
           
           arr=($unique_changed_directories)
-          echo '::set-output name=value::$arr'
+          echo "::set-output name=value::$arr"
   release:
     needs:
     - find-charts-to-release
