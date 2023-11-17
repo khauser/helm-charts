@@ -123,7 +123,8 @@ jobs:
       run: |
         release_inputs=$(cat release-input-parameter.txt | xargs)
         echo "release_inputs: $release_inputs"
-        echo "release-input-parameter=$release_inputs" >> $GITHUB_OUTPUT        
+        echo "release-input-parameter=$release_inputs" >> $GITHUB_OUTPUT
+        rm -f release-input-parameter.txt
     - name: Bump versions
       uses: ./.github/template/bump-version
       with:
