@@ -119,7 +119,7 @@ jobs:
       with:
         name: release-input-parameter
     - name: Read release input parameter
-      id: verify
+      id: read-release-input-parameter
       run: |
         release_inputs=$(cat release-input-parameter.txt | xargs)
         echo "release_inputs: $release_inputs"
