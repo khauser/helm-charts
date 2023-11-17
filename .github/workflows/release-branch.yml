@@ -7,7 +7,7 @@ jobs:
   find-charts-to-release:
     runs-on: ubuntu-latest
     outputs:
-      matrix: ${{ steps.matrix.outputs.value }}
+      matrix: ${{ steps.matrix.outputs.matrix }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -42,7 +42,7 @@ jobs:
           echo "unique_changed_directories: ${unique_changed_directories}"
           
           arr=($unique_changed_directories)
-          echo "::set-output name=value::$arr"
+          echo "matrix=$arr" >> $GITHUB_OUTPUT
   release:
     needs:
     - find-charts-to-release
