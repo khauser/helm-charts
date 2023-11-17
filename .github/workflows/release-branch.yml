@@ -121,7 +121,9 @@ jobs:
     - name: Read release input parameter
       id: verify
       run: |
-        echo "release-input-parameter=$(cat release-input-parameter.txt | xargs)" >> $GITHUB_OUTPUT        
+        release_inputs=$(cat release-input-parameter.txt | xargs)
+        echo "release_inputs: $release_inputs"
+        echo "release-input-parameter=$release_inputs" >> $GITHUB_OUTPUT        
     - name: Bump versions
       uses: ./.github/template/bump-version
       with:
