@@ -111,6 +111,10 @@ jobs:
       contents: write
     runs-on: ubuntu-latest
     steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+      with: #fetch all commits, not just the last one
+        fetch-depth: 0
     - uses: actions/download-artifact@v3
       with:
         name: release-input-parameter
