@@ -18,5 +18,5 @@ runs:
         echo "Missing parameter inputs.changes" 1>&2
         exit 1
       fi
-      pip install --no-cache-dir bump2version
+      pip install --no-cache-dir bump-my-version
       python ./.github/callBump2version.py ${{inputs.changes}}
