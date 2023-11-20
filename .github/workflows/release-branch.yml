@@ -24,8 +24,11 @@ jobs:
           
           last_tag=$(git describe --tags --match="${my_array[1]}-*" --abbrev=0 HEAD)
           sha=$(git rev-list -n 1 $last_tag)
+          
+          base_sha=$(git rev-parse HEAD)
         
           echo "sha=$sha" >> $GITHUB_OUTPUT
+          echo "base_sha=$base_sha" >> $GITHUB_OUTPUT
         else
           echo "Only development branches could be released" 1>&2
           exit 1
@@ -38,6 +41,7 @@ jobs:
         #dir_names: "true"
         dir_names_max_depth: 2
         #dir_names_exclude_root: "true"
+        base_sha: ${{ steps.last_tagged_sha.outputs.base_sha }}
         sha: ${{ steps.last_tagged_sha.outputs.sha }}
         files: |
           charts/**
