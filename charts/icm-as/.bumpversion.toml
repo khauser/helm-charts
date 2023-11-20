@@ -10,3 +10,6 @@ replace = "name: icm-as\nversion: {new_version}"
 filename = "../icm/Chart.yaml"
 search = "name: icm-as\n    version: {current_version}"
 replace = "name: icm-as\n    version: {new_version}"
+
+
+#asdfasdfadsf
