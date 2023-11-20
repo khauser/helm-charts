@@ -11,4 +11,4 @@ filename = "../icm/Chart.yaml"
 search = "name: icm-web\n    version: {current_version}"
 replace = "name: icm-web\n    version: {new_version}"
 
-adsfadsf
+#adsfadsf

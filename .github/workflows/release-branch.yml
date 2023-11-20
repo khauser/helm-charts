@@ -40,7 +40,8 @@ jobs:
       with:
         dir_names_max_depth: 2
         #ignore bump-my-version changes, which are no chart changes
-        files_ignore: "*.toml"
+        files_ignore: |
+          *.toml
         base_sha: ${{ steps.last_tagged_sha.outputs.base_sha }}
         sha: ${{ steps.last_tagged_sha.outputs.sha }}
         files: |
