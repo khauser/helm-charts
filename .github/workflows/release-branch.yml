@@ -48,9 +48,9 @@ jobs:
     - name: Check changed charts
       id: matrix
       run: |
-        changed_directories=$(echo ${{ steps.list-changed-charts.outputs.all_modified_files }} | grep -o 'charts/[^/]*' | cut -d '/' -f 2)
+        changed_directories=$(echo ${{ steps.list-changed-charts.outputs.all_modified_files }} | grep -o 'charts/[^/]*' | cut -d '/' -f 2 | xargs)
         
-        if [[-z "$changed_directories | xargs"]]; then
+        if [[-z "$changed_directories"]]; then
           echo "No chart changes detected. Chore changes need to be released manually." 1>&2
           exit 1
         fi
