@@ -116,7 +116,7 @@ jobs:
         #echo "previous_version   : ${{ steps.version.outputs.previous_version }}"
         echo -n " ${{ matrix.value }}:${{ steps.version.outputs.version_type }}" >> release-input-parameter.txt
     - name: Create release note
-      id: create-release-input-parameter
+      id: create-release-notes
       run: |
         set -x
         
