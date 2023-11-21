@@ -118,10 +118,10 @@ jobs:
     - name: Create release note
       id: create-release-notes
       run: |
-        set -x
+        set -xe
         
-        pip install --no-cache-dir git-changelog
-        git-changelog -R -p github charts/${{ matrix.value }} > RELEASE_NOTES.md
+        wget -q -O - https://github.com/git-chglog/git-chglog/releases/download/v0.15.4/git-chglog_0.15.4_linux_amd64.tar.gz | tar xzf -
+        ./git-chglog --path ./charts/${{ matrix.value }} --tag-filter-pattern "^${{ matrix.value }}-\d+.\d+.\d+$" -o ./charts/${{ matrix.value }}/CHANGELOG.md
     - name: Update artifact
       uses: actions/upload-artifact@v3
       with:
