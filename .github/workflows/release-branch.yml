@@ -38,6 +38,7 @@ jobs:
       id: list-changed-charts
       uses: tj-actions/changed-files@v40.1.1
       with:
+        dir_names: "true"
         dir_names_max_depth: 2
         #ignore files from bump-my-version, which are not chart changes
         files_ignore: "**/*.toml"
@@ -48,6 +49,7 @@ jobs:
     - name: Check changed charts
       id: matrix
       run: |
+        set -x
         changed_directories=$(echo ${{ steps.list-changed-charts.outputs.all_modified_files }} | grep -o 'charts/[^/]*' | cut -d '/' -f 2)
         
         if [[ -z "$changed_directories" ]]; then
