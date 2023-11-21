@@ -121,7 +121,7 @@ jobs:
         set -x
         
         pip install --no-cache-dir git-changelog
-        git-changelog -R charts/${{ matrix.value }} -p github > RELEASE_NOTES.md
+        git-changelog -R -p github charts/${{ matrix.value }} > RELEASE_NOTES.md
     - name: Update artifact
       uses: actions/upload-artifact@v3
       with:
