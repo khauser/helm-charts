@@ -160,7 +160,7 @@ jobs:
         all=("$testlabels")
         for i in $all; do
           IFS=':' read -ra my_array <<< "$i"
-          ./git-chglog --path ./charts/${my_array[0]} --tag-filter-pattern "^${my_array[0]}-\d+.\d+.\d+$" -o ./charts/${my_array[0]}/CHANGELOG.md
+          ./git-chglog/git-chglog --path ./charts/${my_array[0]} --tag-filter-pattern "^${my_array[0]}-\d+.\d+.\d+$" -o ./charts/${my_array[0]}/CHANGELOG.md
         done
 
         rm -Rf git-chglog
