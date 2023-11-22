@@ -156,7 +156,8 @@ jobs:
     - name: Create changelog commits
       run: |
         wget -q -O - https://github.com/git-chglog/git-chglog/releases/download/v0.15.4/git-chglog_0.15.4_linux_amd64.tar.gz | tar xzf - -C git-chglog
-
+        chmod +x ./git-chglog/git-chglog
+        
         all=("$testlabels")
         for i in $all; do
           IFS=':' read -ra my_array <<< "$i"
