@@ -115,13 +115,6 @@ jobs:
         #echo "previous_commit   : ${{ steps.version.outputs.previous_commit }}"
         #echo "previous_version   : ${{ steps.version.outputs.previous_version }}"
         echo -n " ${{ matrix.value }}:${{ steps.version.outputs.version_type }}" >> release-input-parameter.txt
-    - name: Create release note
-      id: create-release-notes
-      run: |
-        set -xe
-        
-        wget -q -O - https://github.com/git-chglog/git-chglog/releases/download/v0.15.4/git-chglog_0.15.4_linux_amd64.tar.gz | tar xzf -
-        ./git-chglog --path ./charts/${{ matrix.value }} --tag-filter-pattern "^${{ matrix.value }}-\d+.\d+.\d+$" -o ./charts/${{ matrix.value }}/CHANGELOG.md
     - name: Update artifact
       uses: actions/upload-artifact@v3
       with:
@@ -154,12 +147,26 @@ jobs:
       uses: ./.github/template/bump-version
       with:
         changes: ${{ steps.read-release-input-parameter.outputs.release-input-parameter }}
-    - name: Create commits
+    - name: Create bump version commits
       run: |
         git config user.name "$GITHUB_ACTOR"
         git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
         git add -A
-        git commit -m "chore: bump versions ${{ steps.read-release-input-parameter.outputs.release-input-parameter }} and dependent charts"
+        git commit -m "chore: bump versions of ${{ steps.read-release-input-parameter.outputs.release-input-parameter }}"
+    - name: Create changelog commits
+      run: |
+        wget -q -O - https://github.com/git-chglog/git-chglog/releases/download/v0.15.4/git-chglog_0.15.4_linux_amd64.tar.gz | tar xzf -
+
+        all=("$testlabels")
+        for i in $all; do
+          IFS=':' read -ra my_array <<< "$i"
+          ./git-chglog --path ./charts/${my_array[0]} --tag-filter-pattern "^${my_array[0]}-\d+.\d+.\d+$" -o ./charts/${my_array[0]}/CHANGELOG.md
+        done
+
+        git config user.name "$GITHUB_ACTOR"
+        git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
+        git add -A
+        git commit -m "chore: generated changelog for ${{ steps.read-release-input-parameter.outputs.release-input-parameter }}"
     - name: Reset main branch with changes from develop/?
       run: |
         git checkout main
