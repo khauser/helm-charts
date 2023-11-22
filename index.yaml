@@ -6,6 +6,38 @@ entries:
       requestedMemoryQuota: 5900Mi
     apiVersion: v2
     appVersion: 11.2.1
+    created: "2023-11-22T15:43:31.674441055Z"
+    dependencies:
+    - name: icm-as
+      repository: file://../icm-as
+      version: 3.0.0
+    - condition: icm-web.enabled
+      name: icm-web
+      repository: file://../icm-web
+      version: 0.8.1
+    - condition: mailhog.enabled
+      name: mailhog
+      repository: https://codecentric.github.io/helm-charts
+      version: 5.2.0
+    - condition: redis.enabled
+      name: redis
+      repository: https://charts.bitnami.com/bitnami
+      version: 17.15.2
+    - condition: redis-cluster.enabled
+      name: redis-cluster
+      repository: https://charts.bitnami.com/bitnami
+      version: 8.6.12
+    description: Intershop Commerce Management - ICM
+    digest: b28a43aa4ec1e6498f29e01648218559ff5ee49ddb74649a1d5005a00d2962e2
+    name: icm
+    urls:
+    - https://github.com/khauser/helm-charts/releases/download/icm-3.0.0/icm-3.0.0.tgz
+    version: 3.0.0
+  - annotations:
+      requestedCpuQuotaInMinutes: "2500"
+      requestedMemoryQuota: 5900Mi
+    apiVersion: v2
+    appVersion: 11.2.1
     created: "2023-11-17T12:02:49.067449965Z"
     dependencies:
     - name: icm-as
@@ -125,6 +157,16 @@ entries:
   icm-as:
   - apiVersion: v2
     appVersion: 11.2.1
+    created: "2023-11-22T15:43:31.825746683Z"
+    description: Intershop Commerce Management - AppServer
+    digest: 606b80c677a9961dcbfc160ea59e60323373400050d1a5c40c80be9cb7d06896
+    name: icm-as
+    type: application
+    urls:
+    - https://github.com/khauser/helm-charts/releases/download/icm-as-3.0.0/icm-as-3.0.0.tgz
+    version: 3.0.0
+  - apiVersion: v2
+    appVersion: 11.2.1
     created: "2023-11-17T12:02:49.202719718Z"
     description: Intershop Commerce Management - AppServer
     digest: 48c6ea05de3a6850780244a598e3834bad4c9c0cdab4b04e66fdef13a340bbd7
@@ -180,6 +222,14 @@ entries:
     version: 0.2.6
   icm-job:
   - apiVersion: v2
+    created: "2023-11-22T15:43:31.975270797Z"
+    description: Intershop Commerce Management - ICM Job Controller
+    digest: 426db5849ae5f2422207ac29da701693e8f58416261048fdb22d68daa48fd485
+    name: icm-job
+    urls:
+    - https://github.com/khauser/helm-charts/releases/download/icm-job-1.1.1/icm-job-1.1.1.tgz
+    version: 1.1.1
+  - apiVersion: v2
     created: "2023-11-17T12:02:49.344631469Z"
     description: Intershop Commerce Management - ICM Job Controller
     digest: 1752c95a722ed60f55dbe01658171f301b2b61a61105f22f362ecb21482fd2ab
@@ -196,6 +246,27 @@ entries:
     - https://github.com/khauser/helm-charts/releases/download/icm-job-1.0.1/icm-job-1.0.1.tgz
     version: 1.0.1
   icm-replication:
+  - annotations:
+      requestedCpuQuotaInMinutes: "2200"
+      requestedMemoryQuota: 10Gi
+    apiVersion: v2
+    appVersion: 11.0.0
+    created: "2023-11-22T15:43:32.168905098Z"
+    dependencies:
+    - alias: icm-live
+      name: icm
+      repository: file://../icm
+      version: 3.0.0
+    - alias: icm-edit
+      name: icm
+      repository: file://../icm
+      version: 3.0.0
+    description: Intershop Commerce Management - ICM Replication
+    digest: 90f03f795f2247316e4149b229c569545eae801c832a9da004242224defc37d4
+    name: icm-replication
+    urls:
+    - https://github.com/khauser/helm-charts/releases/download/icm-replication-3.0.0/icm-replication-3.0.0.tgz
+    version: 3.0.0
   - annotations:
       requestedCpuQuotaInMinutes: "2200"
       requestedMemoryQuota: 10Gi
@@ -298,6 +369,15 @@ entries:
   icm-web:
   - apiVersion: v2
     appVersion: 11.0.13
+    created: "2023-11-22T15:43:32.289358994Z"
+    description: Intershop Commerce Management - Web Adapter and Web Adapter Agent
+    digest: 7aa9c3c99fb2f820a0be9b1ee62db179c2106fd5c4fddffe2b605572d0e051eb
+    name: icm-web
+    urls:
+    - https://github.com/khauser/helm-charts/releases/download/icm-web-0.8.1/icm-web-0.8.1.tgz
+    version: 0.8.1
+  - apiVersion: v2
+    appVersion: 11.0.13
     created: "2023-11-14T10:44:19.880318702Z"
     description: Intershop Commerce Management - Web Adapter and Web Adapter Agent
     digest: ea40d3fc0f1530d899255b9e2343cd55262159aec88eee46f54726b853477c72
@@ -366,4 +446,4 @@ entries:
     urls:
     - https://github.com/khauser/helm-charts/releases/download/pwa-main-0.7.0/pwa-main-0.7.0.tgz
     version: 0.7.0
-generated: "2023-11-17T12:02:49.538727049Z"
+generated: "2023-11-22T15:43:32.289438442Z"
