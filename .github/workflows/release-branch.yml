@@ -155,13 +155,15 @@ jobs:
         git commit -m "chore: bump versions of ${{ steps.read-release-input-parameter.outputs.release-input-parameter }}"
     - name: Create changelog commits
       run: |
-        wget -q -O - https://github.com/git-chglog/git-chglog/releases/download/v0.15.4/git-chglog_0.15.4_linux_amd64.tar.gz | tar xzf -
+        wget -q -O - https://github.com/git-chglog/git-chglog/releases/download/v0.15.4/git-chglog_0.15.4_linux_amd64.tar.gz | tar xzf - -C git-chglog
 
         all=("$testlabels")
         for i in $all; do
           IFS=':' read -ra my_array <<< "$i"
           ./git-chglog --path ./charts/${my_array[0]} --tag-filter-pattern "^${my_array[0]}-\d+.\d+.\d+$" -o ./charts/${my_array[0]}/CHANGELOG.md
         done
+
+        rm -Rf git-chglog
 
         git config user.name "$GITHUB_ACTOR"
         git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
