@@ -1,4 +1,34 @@
 
+<a name="3.1.0"></a>
+## [3.1.0](https://github.com/khauser/helm-charts/compare/icm-as-3.0.0...3.1.0)
+
+> 2023-11-23
+
+### Chore
+
+* bump versions of icm:major icm-as:minor
+
+### Feat
+
+* **icm:** fixed hello
+
+
+<a name="icm-as-3.0.0"></a>
+## [icm-as-3.0.0](https://github.com/khauser/helm-charts/compare/icm-as-2.0.0...icm-as-3.0.0)
+
+> 2023-11-22
+
+### Chore
+
+* generated changelog for icm-as:major icm-job:patch icm-replication:patch icm-web:patch
+* bump versions of icm-as:major icm-job:patch icm-replication:patch icm-web:patch
+
+### Feat
+
+* my test file
+* adfasdf
+
+
 <a name="icm-as-2.0.0"></a>
 ## [icm-as-2.0.0](https://github.com/khauser/helm-charts/compare/icm-as-1.5.0...icm-as-2.0.0)
 
