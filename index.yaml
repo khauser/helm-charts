@@ -335,6 +335,27 @@ entries:
       requestedMemoryQuota: 10Gi
     apiVersion: v2
     appVersion: 11.0.0
+    created: "2023-11-24T10:23:07.764070245Z"
+    dependencies:
+    - alias: icm-live
+      name: icm
+      repository: file://../icm
+      version: 5.0.0
+    - alias: icm-edit
+      name: icm
+      repository: file://../icm
+      version: 5.0.0
+    description: Intershop Commerce Management - ICM Replication
+    digest: a0e5e27558cbd6ea688d86ab419502ec68051825853e56c80656709003fb56a3
+    name: icm-replication
+    urls:
+    - https://github.com/khauser/helm-charts/releases/download/icm-replication-6.0.0/icm-replication-6.0.0.tgz
+    version: 6.0.0
+  - annotations:
+      requestedCpuQuotaInMinutes: "2200"
+      requestedMemoryQuota: 10Gi
+    apiVersion: v2
+    appVersion: 11.0.0
     created: "2023-11-24T09:40:42.057634812Z"
     dependencies:
     - alias: icm-live
@@ -572,4 +593,4 @@ entries:
     urls:
     - https://github.com/khauser/helm-charts/releases/download/pwa-main-0.7.0/pwa-main-0.7.0.tgz
     version: 0.7.0
-generated: "2023-11-24T09:40:42.057734097Z"
+generated: "2023-11-24T10:23:07.764117633Z"
