@@ -1,4 +1,49 @@
 
+<a name="icm-replication-6.0.0"></a>
+## [icm-replication-6.0.0](https://github.com/khauser/helm-charts/compare/icm-replication-5.0.0...icm-replication-6.0.0)
+
+> 2023-11-24
+
+### BREAKING_CHANGE
+
+* **icm:** try this style
+
+### Chore
+
+* bump versions of icm-replication:major
+
+
+<a name="icm-replication-5.0.0"></a>
+## [icm-replication-5.0.0](https://github.com/khauser/helm-charts/compare/icm-replication-4.0.0...icm-replication-5.0.0)
+
+> 2023-11-24
+
+### Chore
+
+* bump versions of icm:major icm-as:major
+
+
+<a name="icm-replication-4.0.0"></a>
+## [icm-replication-4.0.0](https://github.com/khauser/helm-charts/compare/icm-replication-3.0.0...icm-replication-4.0.0)
+
+> 2023-11-23
+
+### Chore
+
+* bump versions of icm:major icm-as:minor
+
+
+<a name="icm-replication-3.0.0"></a>
+## [icm-replication-3.0.0](https://github.com/khauser/helm-charts/compare/icm-replication-2.0.0...icm-replication-3.0.0)
+
+> 2023-11-22
+
+### Chore
+
+* generated changelog for icm-as:major icm-job:patch icm-replication:patch icm-web:patch
+* bump versions of icm-as:major icm-job:patch icm-replication:patch icm-web:patch
+
+
 <a name="icm-replication-2.0.0"></a>
 ## [icm-replication-2.0.0](https://github.com/khauser/helm-charts/compare/icm-replication-1.3.0...icm-replication-2.0.0)
 
