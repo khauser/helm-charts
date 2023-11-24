@@ -166,6 +166,12 @@ jobs:
             --tag-filter-pattern "^${my_array[0]}-\d+.\d+.\d+$" \
             --next-tag ${my_array[0]}-$(grep -A0 '^version:' ./charts/${my_array[0]}/Chart.yaml | awk '{print $2}' | sed 's/\"//g') \
             -o ./charts/${my_array[0]}/CHANGELOG.md
+            
+          ./git-chglog/git-chglog \
+            --path ./charts/${my_array[0]} \
+            --tag-filter-pattern "^${my_array[0]}-\d+.\d+.\d+$" \
+            ${my_array[0]}-$(grep -A0 '^version:' ./charts/${my_array[0]}/Chart.yaml | awk '{print $2}' | sed 's/\"//g') \ 
+            -o ./charts/${my_array[0]}/RELEASE_NOTES.md
         done
 
         rm -Rf git-chglog
@@ -173,7 +179,7 @@ jobs:
         git config user.name "$GITHUB_ACTOR"
         git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
         git add -A
-        git commit -m "chore: generated changelog for ${{ steps.read-release-input-parameter.outputs.release-input-parameter }}"
+        git commit -m "chore: generated changelog+release notes for ${{ steps.read-release-input-parameter.outputs.release-input-parameter }}"
     - name: Reset main branch with changes from develop/?
       run: |
         git checkout main
