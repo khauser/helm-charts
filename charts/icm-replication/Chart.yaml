@@ -3,7 +3,7 @@ appVersion: "11.0.0"
 description: Intershop Commerce Management - ICM Replication
 # name and version must be in this exact order, otherwise bump2version won't work
 name: icm-replication
-version: 5.0.0
+version: 6.0.0
 annotations:
   requestedMemoryQuota: 10Gi
   requestedCpuQuotaInMinutes: 2200
