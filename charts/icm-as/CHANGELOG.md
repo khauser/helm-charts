@@ -1,11 +1,26 @@
 
-<a name="3.1.0"></a>
-## [3.1.0](https://github.com/khauser/helm-charts/compare/icm-as-3.0.0...3.1.0)
+<a name="icm-as-4.0.0"></a>
+## [icm-as-4.0.0](https://github.com/khauser/helm-charts/compare/icm-as-3.1.0...icm-as-4.0.0)
+
+> 2023-11-24
+
+### BREAKING_CHANGE
+
+* remove obsolete files
+
+### Chore
+
+* bump versions of icm:major icm-as:major
+
+
+<a name="icm-as-3.1.0"></a>
+## [icm-as-3.1.0](https://github.com/khauser/helm-charts/compare/icm-as-3.0.0...icm-as-3.1.0)
 
 > 2023-11-23
 
 ### Chore
 
+* generated changelog for icm:major icm-as:minor
 * bump versions of icm:major icm-as:minor
 
 ### Feat
