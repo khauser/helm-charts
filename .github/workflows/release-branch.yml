@@ -171,8 +171,8 @@ jobs:
             --path ./charts/${my_array[0]} \
             --tag-filter-pattern "^${my_array[0]}-\d+.\d+.\d+$" \
             --next-tag ${my_array[0]}-$(grep -A0 '^version:' ./charts/${my_array[0]}/Chart.yaml | awk '{print $2}' | sed 's/\"//g') \
-            ${my_array[0]}-$(grep -A0 '^version:' ./charts/${my_array[0]}/Chart.yaml | awk '{print $2}' | sed 's/\"//g') \ 
-            -o ./charts/${my_array[0]}/RELEASE_NOTES.md
+            -o ./charts/${my_array[0]}/RELEASE_NOTES.md \
+            ${my_array[0]}-$(grep -A0 '^version:' ./charts/${my_array[0]}/Chart.yaml | awk '{print $2}' | sed 's/\"//g') 
         done
 
         rm -Rf git-chglog
